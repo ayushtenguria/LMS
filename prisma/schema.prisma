@@ -10,7 +10,7 @@ datasource db {
 
 model Course {
   id String @id @default(uuid())
-  uderId String 
+  userId String 
   title String @db.Text
   description String? @db.Text
   imageUrl String? @db.Text
