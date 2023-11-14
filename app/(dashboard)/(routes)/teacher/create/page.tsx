@@ -26,8 +26,6 @@ const formSchema = z.object({
   }),
 });
 
-
-
 const CreatePage = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,13 +38,12 @@ const CreatePage = () => {
   const { isSubmitting, isValid } = form.formState;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-   try {
-
-    const response = await axios.post("/api/course", values)
-    router.push('/teacher/courses/${response.data.id}');
-} catch{
-    toast.error("Something went wrong");
-   }
+    try {
+      const response = await axios.post("/api/course", values);
+      router.push("/teacher/courses/${response.data.id}");
+    } catch {
+      toast.error("Something went wrong");
+    }
   };
 
   return (
@@ -78,28 +75,19 @@ const CreatePage = () => {
                   <FormDescription>
                     What will you teach in this course?
                   </FormDescription>
-                  <FormMessage/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
 
-                <div className="flex items-center gap-x-2">
-                    <Link href="/">
-                    <Button
-                    type="button"
-                    variant="ghost"
-                    >
-                        Cancel
-
-                    </Button>
-                    </Link>
-                    <Button
-                    type="submit"
-                    >
-                        Continue
-                    </Button>
-                </div>
-
+            <div className="flex items-center gap-x-2">
+              <Link href="/">
+                <Button type="button" variant="ghost">
+                  Cancel
+                </Button>
+              </Link>
+              <Button type="submit">Continue</Button>
+            </div>
           </form>
         </Form>
       </div>
